@@ -1,0 +1,291 @@
+/* Bukies — proposta A «La piastra». Bespoke Studio, 5/10/2026. */
+
+/* ── PLUMBING_V 1 (reset tecnico canonico) ── */
+[hidden] { display: none !important; }
+img { max-width: 100%; height: auto; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ── i colori: il nero dei guanti, la carta bianca, il caldo della piastra ── */
+:root {
+  --nero: #0E0D0C;
+  --ferro: #1C1A18;
+  --ferro-2: #2A2724;
+  --carta: #F4EFE6;
+  --bianco: #FFFFFF;
+  --brace: #FF5A1F;
+  --brace-scura: #A8360A;
+  --cheddar: #FFB000;
+  --inchiostro: #16130F;
+  --grigio: #5F5850;
+  --grigio-chiaro: #CDC5BA;
+  --f-insegna: 'Bungee', 'Arial Black', sans-serif;
+  --f-testo: 'TASA Orbiter', system-ui, sans-serif;
+  --gutter: clamp(16px, 4vw, 56px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body { margin: 0; background: var(--nero); color: var(--bianco); font: 400 1.0625rem/1.6 var(--f-testo); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 400; }
+p { margin: 0 0 1em; }
+button { font: inherit; }
+:focus-visible { outline: 3px solid var(--cheddar); outline-offset: 3px; }
+
+.salta { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; background: var(--bianco); color: var(--nero); text-decoration: none; }
+.salta:focus { top: 10px; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* il logo: la loro maschera colorata col colore del testo */
+.marchio__logo { display: block; width: 132px; aspect-ratio: 900 / 283; background: currentColor; -webkit-mask: url('../img/logo-bukies.png') center / contain no-repeat; mask: url('../img/logo-bukies.png') center / contain no-repeat; }
+
+/* ── la testata ── */
+.testata { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(14, 13, 12, .94); border-bottom: 1px solid rgba(255, 255, 255, .08); }
+.testata__dentro { display: flex; align-items: center; gap: 24px; max-width: 1360px; margin: 0 auto; padding: 12px var(--gutter); }
+.marchio { color: var(--bianco); text-decoration: none; flex: none; }
+.voci { display: flex; gap: 26px; margin-left: auto; }
+.voci a { color: var(--bianco); text-decoration: none; font-weight: 600; font-size: .98rem; letter-spacing: .02em; }
+.voci a:hover { color: var(--cheddar); }
+.testata__azioni { display: flex; align-items: center; gap: 14px; }
+.lingue { display: flex; border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; overflow: hidden; }
+.lingue button { padding: 6px 11px; border: 0; background: transparent; color: var(--bianco); font-weight: 700; font-size: .82rem; cursor: pointer; }
+.lingue button[aria-pressed="true"] { background: var(--bianco); color: var(--nero); }
+.testata__ig { padding: 8px 16px; border-radius: 999px; background: var(--brace); color: var(--nero); font-weight: 700; font-size: .9rem; text-decoration: none; }
+.burger { display: none; width: 44px; height: 44px; padding: 10px; border: 0; background: transparent; cursor: pointer; }
+.burger span { display: block; height: 2px; margin: 5px 0; background: var(--bianco); }
+.menu-mobile { position: fixed; top: 68px; left: 0; right: 0; z-index: 49; display: flex; flex-direction: column; padding: 12px var(--gutter) 24px; background: var(--nero); border-bottom: 3px solid var(--brace); }
+.menu-mobile a { padding: 14px 0; border-bottom: 1px solid rgba(255, 255, 255, .12); color: var(--bianco); text-decoration: none; font-family: var(--f-insegna); font-size: 1.3rem; }
+.menu-mobile .menu-mobile__ig { font-family: var(--f-testo); font-size: 1rem; font-weight: 700; color: var(--cheddar); border: 0; }
+@media (max-width: 960px) {
+  .voci { display: none; }
+  .burger { display: block; }
+  .testata__azioni { margin-left: auto; }
+}
+@media (max-width: 520px) { .testata__ig { display: none; } .testata__dentro { gap: 10px; } .marchio__logo { width: 112px; } }
+
+/* ── i bottoni ── */
+.bottone { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 12px 26px; border-radius: 999px; font-weight: 700; font-size: 1rem; letter-spacing: .02em; text-decoration: none; }
+.bottone--brace { background: var(--brace); color: var(--nero); }
+.bottone--vuoto { border: 2px solid rgba(255, 255, 255, .7); color: var(--bianco); }
+.bottone--nero { background: var(--nero); color: var(--bianco); }
+.bottone:hover { transform: translateY(-1px); }
+
+.occhio { margin: 0 0 14px; font-weight: 700; font-size: .86rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brace-scura); }
+.occhio--brace { color: var(--brace); }
+
+/* ── l'apertura ── */
+.apertura { position: relative; padding: 108px 0 0; background: radial-gradient(70% 60% at 72% 42%, rgba(255, 90, 31, .16), transparent 70%), var(--nero); }
+.apertura__dentro { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 64px); align-items: center; max-width: 1360px; margin: 0 auto; padding: 0 var(--gutter) 40px; }
+.titolo-grande { font-family: var(--f-insegna); font-size: clamp(2rem, 4.2vw, 4.1rem); line-height: 1.08; text-transform: uppercase; margin-bottom: 22px; }
+.titolo-grande__riga { display: block; }
+.titolo-grande__riga--e { color: var(--cheddar); }
+.apertura__frase { max-width: 32em; font-size: 1.15rem; color: var(--grigio-chiaro); }
+.apertura__azioni { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.annuncio { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 18px var(--gutter); background: var(--brace); color: var(--nero); text-decoration: none; font-family: var(--f-insegna); font-size: clamp(1rem, 2.2vw, 1.6rem); text-transform: uppercase; text-align: center; }
+.annuncio__punto { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--nero); box-shadow: 0 0 0 4px rgba(14, 13, 12, .25); }
+.annuncio__freccia { flex: none; }
+@media (max-width: 900px) {
+  .apertura { padding-top: 92px; }
+  .apertura__dentro { grid-template-columns: 1fr; }
+}
+
+/* la figura della firma (fuori dal disegno) */
+.smash { margin: 0; }
+.smash__didascalia { min-height: 3.2em; margin: 10px 0 12px; color: var(--grigio-chiaro); font-size: .98rem; }
+.smash__modi { display: flex; gap: 10px; flex-wrap: wrap; }
+.smash__modi button { min-height: 44px; padding: 8px 20px; border: 2px solid rgba(255, 255, 255, .5); border-radius: 999px; background: transparent; color: var(--bianco); font-weight: 700; cursor: pointer; }
+.smash__modi button[aria-pressed="true"] { background: var(--cheddar); border-color: var(--cheddar); color: var(--nero); }
+.no-js .smash__modi { visibility: hidden; }
+.smash[data-modo="0"] .smash__d[data-m="1"], .smash[data-modo="1"] .smash__d[data-m="0"] { display: none; }
+
+/*SMASH*/
+.smash__svg { display: block; width: 100%; height: auto; overflow: visible; }
+.sm-spazzolato { stroke: #FFFFFF; stroke-opacity: .05; stroke-width: 1; fill: none; }
+.sm-bordo { fill: none; stroke: #4a4540; stroke-width: 3; }
+.sm-gocce { fill: #000000; fill-opacity: .35; }
+.sm-merletto { fill: #2a1208; }
+.sm-crosta { fill: #8a4520; }
+.sm-polpa { fill: #5e2a15; }
+.sm-grana { fill: #4a1f10; fill-opacity: .7; }
+.sm-grana-chiara { fill: #b0683a; fill-opacity: .5; }
+.sm-cipolle { fill: none; stroke: #E2A94E; stroke-width: 5; stroke-linecap: round; }
+.sm-cheddar { fill: url(#smCheddar); fill-opacity: .97; stroke: #EE9400; stroke-width: 2; stroke-linejoin: round; }
+.sm-lucido { fill: none; stroke: #FFE08A; stroke-width: 6; stroke-linecap: round; opacity: .7; }
+.sm-fumo { fill: none; stroke: #FFFFFF; stroke-opacity: .16; stroke-width: 10; stroke-linecap: round; }
+.sm-scintille { fill: none; stroke: #FFC23A; stroke-width: 4; stroke-linecap: round; }
+.sm-pressa-bordo { fill: none; stroke: #5d5852; stroke-width: 3; }
+.sm-manico { fill: #1a1816; }
+.sm-foglio { fill: #F4EFE6; }
+.sm-filigrana { fill: none; stroke: #16130F; stroke-opacity: .12; stroke-width: 2; }
+[data-modo="0"] [data-m="1"], [data-modo="1"] [data-m="0"] { display: none; }
+.firma-attesa .smash .sm-cottura, .firma-attesa .smash .sm-marchio { opacity: 0; }
+/*/SMASH*/
+
+/* ── i capitoli ── */
+.capitolo { position: relative; padding: clamp(64px, 9vw, 120px) var(--gutter); }
+.capitolo > * { max-width: 1240px; margin-left: auto; margin-right: auto; }
+.capitolo--carta { background: var(--carta); color: var(--inchiostro); }
+.capitolo--ferro { background: var(--ferro); color: var(--bianco); }
+.capitolo--nero { background: var(--nero); color: var(--bianco); }
+.capitolo--brace { background: var(--brace); color: var(--nero); }
+.capitolo__titolo { font-family: var(--f-insegna); font-size: clamp(1.8rem, 4vw, 3.4rem); line-height: 1.1; text-transform: uppercase; margin-bottom: 22px; }
+.capitolo__intro { font-size: 1.12rem; padding-right: max(0px, calc(100% - 40em)); }
+.capitolo__nota { margin-top: 28px; font-size: .95rem; color: var(--grigio); }
+.capitolo--ferro .capitolo__nota, .capitolo--nero .capitolo__nota { color: var(--grigio-chiaro); }
+
+.js .reveal { opacity: 0; }
+.js .reveal.in-view { opacity: 1; }
+html:not(.js) .reveal { opacity: 1; }
+.foto { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.foto img { display: block; width: 100%; height: auto; }
+figure { margin: 0; }
+figcaption { margin-top: 10px; font-size: .92rem; color: var(--grigio); }
+.capitolo--ferro figcaption, .capitolo--nero figcaption { color: var(--grigio-chiaro); }
+
+/* ── Milano ── */
+.milano { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.milano__titolo { font-family: var(--f-insegna); font-size: clamp(3rem, 9vw, 7.4rem); line-height: 1; text-transform: uppercase; margin-bottom: 18px; }
+.milano__titolo span { display: block; }
+.milano__acceso { color: var(--brace-scura); }
+.milano__via { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin-bottom: 18px; }
+.milano__via-nome { font-family: var(--f-insegna); font-size: clamp(1.4rem, 3vw, 2.2rem); }
+.milano__via-zona { font-weight: 700; color: var(--grigio); }
+.milano__frase { max-width: 36em; font-size: 1.1rem; }
+.milano__maglia { display: inline-flex; flex-direction: column; margin: 10px 0 26px; padding: 18px 26px; background: var(--nero); color: var(--bianco); font-family: var(--f-insegna); font-size: clamp(1.1rem, 2.4vw, 1.6rem); line-height: 1.15; text-transform: uppercase; text-align: center; transform: rotate(-2deg); }
+.milano__foto .foto { border: 6px solid var(--bianco); box-shadow: 0 18px 40px rgba(22, 19, 15, .25); transform: rotate(1.5deg); }
+@media (max-width: 900px) { .milano { grid-template-columns: 1fr; } }
+
+/* ── cosa facciamo: la comanda ── */
+.cosa { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 32px clamp(28px, 5vw, 64px); align-items: start; }
+.cosa__testa { grid-column: 1 / -1; }
+.cosa__intro { max-width: 36em; font-size: 1.15rem; color: var(--grigio-chiaro); }
+.comanda { list-style: none; margin: 0; padding: 26px clamp(18px, 3vw, 34px); background: var(--carta); color: var(--inchiostro); border-top: 10px dashed var(--ferro); box-shadow: 0 20px 40px rgba(0, 0, 0, .35); }
+.comanda__riga { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; padding: 16px 0; border-bottom: 2px dashed rgba(22, 19, 15, .25); }
+.comanda__riga:last-child { border-bottom: 0; }
+.comanda__n { font-family: var(--f-insegna); font-size: 1.7rem; line-height: 1.1; color: var(--brace-scura); }
+.comanda h3 { font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 4px; }
+.comanda p { margin: 0; }
+.cosa__foto { position: sticky; top: 96px; }
+@media (max-width: 900px) { .cosa { grid-template-columns: 1fr; } .cosa__foto { position: static; } }
+
+/* ── il menù a cartelli ── */
+.cartelli { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: start; margin-top: 12px; }
+.cartello { display: flex; flex-direction: column; background: var(--bianco); border: 3px solid var(--inchiostro); box-shadow: 8px 8px 0 var(--cheddar); }
+.cartello--grande { grid-column: span 2; flex-direction: row; }
+.cartello--grande .cartello__foto { flex: 1 1 55%; }
+.cartello--grande .cartello__testo { flex: 1 1 45%; }
+.cartello--cookie { grid-column: span 2; flex-direction: row-reverse; }
+.cartello--cookie .cartello__foto { flex: 1 1 50%; }
+.cartello--cookie .cartello__testo { flex: 1 1 50%; }
+.cartello__foto { border-bottom: 3px solid var(--inchiostro); }
+.cartello--grande .cartello__foto { border-bottom: 0; border-right: 3px solid var(--inchiostro); }
+.cartello--cookie .cartello__foto { border-bottom: 0; border-left: 3px solid var(--inchiostro); }
+.cartello--grande .cartello__foto, .cartello--cookie .cartello__foto { display: flex; align-items: center; background: var(--inchiostro); }
+.cartello__testo { padding: 22px 24px 26px; }
+.cartello__n { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; margin-bottom: 12px; border-radius: 50%; background: var(--inchiostro); color: var(--cheddar); font-family: var(--f-insegna); font-size: 1.3rem; }
+.cartello__nome { font-family: var(--f-insegna); font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.1; text-transform: uppercase; margin-bottom: 12px; }
+.cartello__taglie { display: flex; gap: 8px; margin: 16px 0 0; }
+.cartello__taglie span { display: inline-flex; align-items: center; justify-content: center; min-width: 46px; height: 46px; padding: 0 8px; border: 3px solid var(--inchiostro); border-radius: 50%; font-family: var(--f-insegna); font-size: 1.1rem; }
+.cartello--solo-testo { grid-column: 1 / -1; background: var(--inchiostro); color: var(--bianco); box-shadow: 8px 8px 0 var(--brace); }
+.cartello--solo-testo .cartello__n { flex: none; margin: 0; background: var(--cheddar); color: var(--inchiostro); }
+.cartello--solo-testo .cartello__testo { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 20px 26px; }
+.cartello--solo-testo .cartello__nome, .cartello--solo-testo p { margin: 0; }
+.cartello--solo-testo .cartello__testo p:last-child { font-size: 1.1rem; }
+.cartello--speciale { box-shadow: 8px 8px 0 var(--brace); }
+.starter { margin-top: 40px; padding: 22px 26px; border: 3px dashed var(--inchiostro); }
+.starter__titolo { font-family: var(--f-insegna); font-size: 1.3rem; text-transform: uppercase; margin-bottom: 8px; }
+.starter__lista { margin: 0; font-size: 1.1rem; font-weight: 600; }
+@media (max-width: 1000px) {
+  .cartelli { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cartello--grande, .cartello--cookie { grid-column: 1 / -1; }
+  .cartello--speciale { order: 3; }
+  .cartello--solo-testo { order: 4; }
+  .cartello--cookie { order: 5; }
+}
+@media (max-width: 700px) {
+  .cartelli { grid-template-columns: 1fr; }
+  .cartello--grande, .cartello--cookie { flex-direction: column; }
+  .cartello--grande .cartello__foto, .cartello--cookie .cartello__foto { border: 0; border-bottom: 3px solid var(--inchiostro); }
+}
+
+/* ── la storia ── */
+.storia { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+.storia__titolo { font-family: var(--f-insegna); font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1.05; text-transform: uppercase; }
+.storia__e { color: var(--cheddar); }
+.storia__marchio { display: block; width: min(320px, 80%); aspect-ratio: 900 / 431; margin-top: 30px; background: var(--brace); -webkit-mask: url('../img/scritta-bukies.png') center / contain no-repeat; mask: url('../img/scritta-bukies.png') center / contain no-repeat; transform: rotate(-6deg); }
+.storia__testo { font-size: 1.15rem; color: var(--grigio-chiaro); max-width: 36em; }
+.storia__capo { font-size: 1.45rem; line-height: 1.45; color: var(--bianco); font-weight: 600; }
+.storia__idea { margin: 30px 0; padding: 0 0 0 22px; border-left: 6px solid var(--brace); }
+.storia__idea p { margin: 0; font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.35; font-weight: 700; color: var(--bianco); }
+.storia__fine { color: var(--cheddar); font-weight: 700; font-size: 1.3rem; }
+@media (max-width: 900px) { .storia { grid-template-columns: 1fr; } }
+
+/* ── la galleria ── */
+.galleria { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.galleria__voce .foto { border-radius: 6px; overflow: hidden; }
+@media (max-width: 700px) { .galleria { grid-template-columns: 1fr; } }
+
+/* ── i locali: le sei piastre ── */
+.piastre { list-style: none; margin: 30px auto 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.piastra { display: flex; flex-direction: column; padding: 22px 22px 18px; background: var(--ferro); color: var(--bianco); border-radius: 14px; box-shadow: inset 0 0 0 2px #3a3530; }
+.piastra--nuova { grid-column: span 2; grid-row: span 2; background: radial-gradient(80% 70% at 30% 20%, rgba(255, 90, 31, .32), transparent 70%), var(--nero); box-shadow: inset 0 0 0 3px var(--brace); }
+.piastra__stato { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-weight: 700; font-size: .82rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cheddar); }
+.piastra__luce { flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--brace); box-shadow: 0 0 10px 3px rgba(255, 90, 31, .7); }
+.piastra__citta { font-family: var(--f-insegna); font-size: clamp(1.4rem, 2.3vw, 2rem); line-height: 1.1; text-transform: uppercase; margin-bottom: 8px; }
+.piastra--nuova .piastra__citta { font-size: clamp(2.4rem, 6vw, 5rem); }
+.piastra__via { margin-bottom: 6px; color: var(--grigio-chiaro); }
+.piastra__nota { color: var(--bianco); font-weight: 600; }
+.piastra__azioni { margin: 4px 0 14px; }
+.piastra__azioni a { color: var(--cheddar); font-weight: 700; }
+.piastra .mappa-clic { margin-top: auto; border-radius: 8px; color: var(--grigio-chiaro); font-size: 1rem; }
+.piastra--nuova .mappa-clic { flex: 1 1 auto; }
+.piastra--nuova iframe { flex: 1 1 auto; min-height: 240px; }
+.piastra iframe { display: block; width: 100%; margin-top: auto; border: 0; border-radius: 8px; }
+@media (max-width: 1000px) { .piastre { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .piastre { grid-template-columns: 1fr; } .piastra--nuova { grid-column: auto; grid-row: auto; } .piastra:not(.piastra--nuova) .mappa-clic { min-height: 150px; padding: 14px; } }
+
+/* ── recensioni ── */
+.voto { display: flex; align-items: baseline; gap: 12px; margin-bottom: 30px; font-weight: 700; color: var(--grigio-chiaro); }
+.voto__n { font-family: var(--f-insegna); font-weight: 400; font-size: 2.6rem; color: var(--cheddar); }
+.recensioni { list-style: none; margin: 0 auto; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.recensione { display: flex; flex-direction: column; justify-content: space-between; padding: 24px; background: var(--ferro); border-top: 4px solid var(--brace); }
+.recensione__testo { font-size: 1.04rem; }
+.recensione__chi { margin: 10px 0 0; color: var(--grigio-chiaro); font-size: .92rem; }
+.recensione__chi b { color: var(--bianco); }
+.recensioni__nota { margin-top: 26px; font-size: .92rem; color: var(--grigio-chiaro); }
+.recensioni__nota a { color: var(--cheddar); }
+@media (max-width: 1000px) { .recensioni { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .recensioni { grid-template-columns: 1fr; } }
+
+/* ── contatti ── */
+.contatti { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; }
+.contatti__titolo { font-family: var(--f-insegna); font-size: clamp(2rem, 5.4vw, 4.6rem); line-height: 1.05; text-transform: uppercase; }
+.contatti__righe p { margin: 0 0 10px; font-size: 1.2rem; }
+.contatti__righe a { font-weight: 700; }
+.contatti__etichetta { display: block; font-size: .82rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+
+/* ── il piede ── */
+.piede { padding: 56px var(--gutter) 96px; background: var(--nero); color: var(--grigio-chiaro); font-size: .95rem; }
+.piede__dentro { max-width: 1240px; margin: 0 auto; }
+.piede__logo { color: var(--bianco); margin-bottom: 14px; }
+.piede__logo .marchio__logo { width: 180px; }
+.piede__slogan { color: var(--bianco); font-weight: 700; }
+.piede__su { color: var(--cheddar); font-weight: 700; text-decoration: none; }
+.piede a { color: inherit; }
+
+/* ── barra del telefono, lightbox, mappa al clic ── */
+.action-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--nero); box-shadow: 0 -3px 0 var(--brace); transform: translateY(110%); transition: transform .25s; }
+.action-bar.is-visible { transform: translateY(0); }
+.action-bar a { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 54px; padding: 0 4px; text-align: center; color: var(--bianco); font-family: var(--f-insegna); font-size: 1rem; text-transform: uppercase; text-decoration: none; }
+.action-bar a:first-child { background: var(--brace); color: var(--nero); }
+@media (min-width: 961px) { .action-bar { display: none; } }
+#lightbox { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(14, 13, 12, .95); }
+#lightbox[hidden] { display: none !important; }
+#lightbox img { width: auto; max-width: min(1000px, 100%); max-height: 88vh; }
+#lightboxClose { position: absolute; top: 14px; right: 16px; width: 48px; height: 48px; border: 1px solid rgba(255, 255, 255, .6); border-radius: 50%; background: transparent; color: #fff; font-size: 32px; line-height: 1; cursor: pointer; }
+.mappa-clic { display: flex; align-items: center; justify-content: center; width: 100%; min-height: var(--mappa-h, 320px); padding: 20px; text-align: center; background: repeating-linear-gradient(0deg, rgba(127, 127, 127, 0.14) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, rgba(127, 127, 127, 0.14) 0 1px, transparent 1px 28px); }
+.mappa-clic__velo { display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 32em; }
+.mappa-clic__btn { display: inline-block; padding: 0.7em 1.3em; border: 2px solid currentColor; border-radius: 999px; color: inherit; font-weight: 700; line-height: 1.2; text-decoration: none; background: transparent; cursor: pointer; }
+.mappa-clic__btn:hover, .mappa-clic__btn:focus-visible { text-decoration: underline; }
+.mappa-clic__nota { margin: 0; font-size: 0.85em; line-height: 1.45; }
